@@ -7,15 +7,16 @@
         <router-link
           v-for="person in user"
           :key="person.id"
-          :to="{ name: 'UserDetail', params: { personName: person.name ,id: person.id, loading}}"
+          :to="{ name: 'Posts', params: { personName: person.name ,id: person.id, loading}}"
         >
           <h2>{{ person.name }}</h2>
-          <h3>{{ person.username }}</h3>
-          <p>{{ person.email }}</p>
-          <p>{{ person.phone }}</p>
-          <p>{{ person.website }}</p>
-          <address v-for="data in person.address" :key="data.suite">
-            {{ data }}
+          <h3><font-awesome-icon icon="user" /> {{ person.username }}</h3>
+          <p class="email"><font-awesome-icon icon="envelope" /> {{ person.email }}</p>
+          <p class="phone"><font-awesome-icon icon="phone" /> {{ person.phone }}</p>
+          <p class="website"><font-awesome-icon icon="globe" /> {{ person.website }}</p>
+          <font-awesome-icon icon="address-book" />
+          <address v-for="data in person.address" :key="data.suite" class="address">
+           {{ data }}
           </address>
         </router-link>
       </div>
@@ -47,12 +48,13 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
+<style>
+.content h1 {
   text-align: center;
+  color: var(--green);
 }
 .container {
-  margin: 20px;
+  margin: 20px 0;
 }
 .users {
   display: grid;
@@ -60,12 +62,23 @@ h1 {
   grid-gap: 10px;
 }
 .users a {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 var(--box-shadow-color);
   transition: 0.3s;
-  padding: 40px 10px;
-  text-align: center;
+  padding: 20px 10px;
   cursor: pointer;
-  color: black;
+  color: var(--black);
+  border: solid 1px var(--border-color);
+  border-radius: 25px;
+  background: var(--white);
+}
+.website {
+  color: var(--link-text);
+}
+.email {
+  color: var(--green);
+}
+.address {
+  color: var(--purple);
 }
 @media only screen and (max-width: 600px) {
   .users {

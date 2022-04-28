@@ -3,9 +3,7 @@ import {registerRoute} from 'workbox-routing';
 import {StaleWhileRevalidate} from 'workbox-strategies';
 import {ExpirationPlugin} from 'workbox-expiration';
 import {CacheableResponsePlugin} from 'workbox-cacheable-response';
-import {CacheFirst, NetworkFirst} from 'workbox-strategies';
-/* eslint-disable no-undef */
-
+import {CacheFirst} from 'workbox-strategies';
   // eslint-disable-next-line no-restricted-globals,no-underscore-dangle
 new precacheAndRoute(self.__WB_MANIFEST);
 
@@ -62,40 +60,12 @@ new precacheAndRoute(self.__WB_MANIFEST);
       ],
     }),
   );
-
   registerRoute(
-    new RegExp('/.*'),
-    new NetworkFirst({}),
-    'GET',
+    new RegExp('https://jsonplaceholder.typicode.com/'),
+    new CacheFirst({
+      cacheName: 'api-caches'
+    })
   );
 
-  // self.addEventListener('fetch', event => {
-  //   console.log('Fetch event for ', event.request.url);
-  //   event.respondWith(
-  //     caches.match(event.request)
-  //     .then(response => {
-  //       if (response) {
-  //         console.log('Found ', event.request.url, ' in cache');
-  //         return response;
-  //       }
-  //       console.log('Network request for ', event.request.url);
-  //       return fetch(event.request)
-  
-  //       // TODO 4 - Add fetched files to the cache
-  
-  //     }).catch(error => {
-  //         console.log(error)
-  
-  //       // TODO 6 - Respond with custom offline page
-  
-  //     })
-  //   );
-  // });
-  self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request).then(function(response) {
-        return response || fetch(event.request);
-      })
-    );
-  });
+  self.addEventListener('fetch', function() {})
 /* eslint-enable no-undef */

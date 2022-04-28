@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Users from '@/components/Users.vue'
-import UserDetail from "@/components/UserDetail.vue"
+import Posts from "@/components/Posts.vue"
+import PostDetails from "@/components/PostDetails.vue"
 const routes = [
   {
     path: "/",
@@ -9,9 +10,15 @@ const routes = [
   },
   {
       path: "/users/:id/posts",
-      name: "UserDetail",
-      component: UserDetail,
+      name: "Posts",
+      component: Posts,
       props: true
+  },
+  {
+    path: "/posts/:postId/comments",
+    name: "PostDetails",
+    component: PostDetails,
+    props: true
   }
 ];
 
